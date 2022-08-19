@@ -12,6 +12,13 @@
   <h1>Articles</h1>      
 </div>
 
+<style>
+  div{
+    text-align:center;
+  }
+</style>
+
+<div>
 <p>Title :<%= @article.title %></p>
 <p>Body :<%= @article.body %></p>
 
@@ -26,5 +33,25 @@
                   } %></li>
 </ul>
 <%= link_to "Back", { controller: 'articles', action: 'index'} %>
+
+<h2>Comments</h2>
+<%= render @article.comments %>
+
+
+<h3>Add a comment:</h3>
+<%= form_with model: [ @article, @article.comments.build ] do |form| %>
+  <p>
+    <%= form.label :commenter %><br>
+    <%= form.text_field :commenter %>
+  </p>
+  <p>
+    <%= form.label :body %><br>
+    <%= form.text_area :body %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
+</div>
 
 </html>
